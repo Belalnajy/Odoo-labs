@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_patient_status">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="row">
+                            <div class="col-8">
+                                <h1 style="color: #f44336;">Patient Status Report</h1>
+                                <div class="row mt-4">
+                                    <div class="col-6">
+                                        <strong>Name:</strong>
+                                        <span t-field="doc.name" />
+                                        <br />
+                                        <strong>Age:</strong>
+                                        <span t-field="doc.age" />
+                                        <br />
+                                        <strong>Department:</strong>
+                                        <span t-field="doc.department_id.name" />
+                                        <br />
+                                        <strong>Doctors:</strong>
+                                        <span t-esc="', '.join(doc.doctors_ids.mapped('name'))" />
+                                    </div>
+                                    <div class="col-6">
+                                        <strong>Birth date:</strong>
+                                        <span t-field="doc.birth_date" />
+                                        <br />
+                                        <strong>PCR:</strong>
+                                        <span t-field="doc.cr_ratio" />
+                                        <br />
+                                        <strong>Blood Type:</strong>
+                                        <span t-field="doc.blood_type" />
+                                        <br />
+                                        <strong>Email:</strong>
+                                        <span t-field="doc.email" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 text-center">
+                                <img t-if="doc.image" t-att-src="image_data_uri(doc.image)"
+                                    style="max-width: 150px;" />
+                            </div>
+                        </div>
+
+                        <h3 class="mt-4" style="color: #f44336;">Log History</h3>
+                        <table class="table table-bordered mt-2">
+                            <thead class="bg-primary text-white">
+                                <tr>
+                                    <th>User</th>
+                                    <th>Date</th>
+                                    <th>Info</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="doc.log_ids" t-as="log">
+                                    <td>
+                                        <span t-field="log.created_by.name" />
+                                    </td>
+                                    <td>
+                                        <span t-field="log.date" />
+                                    </td>
+                                    <td>
+                                        <span t-field="log.description" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo> 

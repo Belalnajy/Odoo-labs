@@ -14,7 +14,7 @@
                 <field name="cr_ratio" />
                 <field name="department_id" />
                 <field name="state" />
-                <field name="doctors_ids" />
+                <field name="doctors_ids" groups="group_hms_manager" />
                 <field name="blood_type" />
                 <field name="pcr" />
                 <!-- <field name="image" widget="image" class="oe_avatar" /> -->
@@ -56,7 +56,7 @@
                                 <field name="department_id" />
                                 <field name="department_capacity" />
                                 <field name="doctors_ids" widget="many2many_tags"
-                                    readonly="not department_id" />
+                                    readonly="not department_id" groups="group_hms_manager" />
                                 <!-- <field name="state" /> -->
                                 <field name="log_ids">
                                     <list>
