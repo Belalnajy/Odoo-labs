@@ -1,0 +1,16 @@
+.p_list_header table thead tr th {
+  background-color: rgba(83, 39, 19, 0.42) !important;
+  color: rgb(240, 240, 240) !important;
+  text-align: center !important;
+}
+.p_list_header table thead tr th:nth-child(1) {
+  width: 10% !important;
+}
+.o_list_sortable_caret {
+  color: rgb(0, 0, 0) !important;
+}
+
+.p_list_header table tbody tr:hover {
+  background-color: rgba(83, 39, 19, 0.42) !important;
+  color: rgb(0, 0, 0) !important;
+}

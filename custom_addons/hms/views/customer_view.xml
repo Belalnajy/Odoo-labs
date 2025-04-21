@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+
+        <record id="view_partner_list_inherit_website" model="ir.ui.view">
+            <field name="name">res.partner.list.inherit.website</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree" />
+            <field name="arch" type="xml">
+                <list string="Contacts" sample="1" multi_edit="1">
+                    <field name="website" />
+                    <field name="related_patient_id" string="Patient" />
+                </list>
+            </field>
+        </record>
+
+
+        <record id="view_partner_form_inherit_patient" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit.patient</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <!-- first way -->
+                <!-- <group name="misc" string="Misc">
+                    <field name="company_id" position="after" />
+                    <field name="related_patient_id" />
+                </group> -->
+
+                <xpath expr="//field[@name='industry_id']" position="after">
+                    <field name="related_patient_id" />
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

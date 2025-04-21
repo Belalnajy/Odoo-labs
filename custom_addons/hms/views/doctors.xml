@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="hms_doctors_list" model="ir.ui.view">
+        <field name="name">hms.doctors.list</field>
+        <field name='model'>hms.doctors</field>
+        <field name='arch' type='xml'>
+            <list>
+                <field name="first_name" />
+                <field name="last_name" />
+                <field name="image" widget="image" class="oe_avatar"
+                    options="{'preview_image': 'image', 'size': [100, 100]}" />
+            </list>
+        </field>
+    </record>
+
+    <record id="hms_doctors_form" model="ir.ui.view">
+        <field name="name">hms.doctors.form</field>
+        <field name="model">hms.doctors</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <h1>
+                        <field name="name" placeholder="Doctor Name" />
+                    </h1>
+                    <group string="General">
+                        <field name="first_name" />
+                        <field name="last_name" />
+                        <field name="patient_ids" widget="many2many_tags"  />
+                        <field name="image" widget="image" class="oe_avatar" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="hms_doctors_search" model="ir.ui.view">
+        <field name="name">hms.doctors.search</field>
+        <field name='model'>hms.doctors</field>
+        <field name='arch' type='xml'>
+            <search>
+                <field name="first_name" />
+                <field name="last_name" />
+
+            </search>
+        </field>
+    </record>
+
+    <record id="hms_doctors_action" model="ir.actions.act_window">
+        <field name="name">Doctors</field>
+        <field name="res_model">hms.doctors</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

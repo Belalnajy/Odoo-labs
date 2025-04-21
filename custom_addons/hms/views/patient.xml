@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="hms_patient_list" model="ir.ui.view">
+        <field name="name">hms.patient.list</field>
+        <field name='model'>hms.patient</field>
+        <field name='arch' type='xml'>
+            <list multi_edit="true" delete="0" class="p_list_header">
+                <field name="first_name" />
+                <field name="last_name" />
+                <field name="email" />
+                <field name="birth_date" />
+                <field name="history" />
+                <field name="cr_ratio" />
+                <field name="department_id" />
+                <field name="state" />
+                <field name="doctors_ids" />
+                <field name="blood_type" />
+                <field name="pcr" />
+                <!-- <field name="image" widget="image" class="oe_avatar" /> -->
+                <field name="age" />
+                <field name="address" />
+            </list>
+        </field>
+    </record>
+    <record
+        id="hms_patient_form" model="ir.ui.view">
+        <field name="name">hms.patient.form</field>
+        <field name="model">hms.patient</field>
+        <field name="arch" type="xml">
+            <form edit="true">
+                <sheet>
+                    <h1>
+                        <field name="name" placeholder="Patient Name" />
+                    </h1>
+                    <header>
+                        <button type="object" name="action_undetermined" class="btn-primary"
+                            string="Set To Undetermined " invisible="state == 'undetermined'" />
+                        <button type="object" name="action_good" class="btn-secondary"
+                            string="Set To Good " invisible="state == 'good'" />
+                        <button type="object" name="action_fair" class="btn-success"
+                            string="Set To Fair " invisible="state == 'fair'" />
+                        <button type="object" name="action_serious" class="btn-danger"
+                            string="Set To Serious " invisible="state == 'serious'" />
+                        <field name="state" widget="statusbar" />  <!--statusbar_visible="good,fair,serious"
+                        options="{'clickable':1}" -->
+                    </header>
+                    <notebook>
+                        <page string="General">
+                            <group>
+                                <field name="first_name" />
+                                <field name="last_name" />
+                                <field name="email" />
+                                <field name="birth_date" />
+                                <field name="address" required="1" />
+                                <field name="department_id" />
+                                <field name="department_capacity" />
+                                <field name="doctors_ids" widget="many2many_tags"
+                                    readonly="not department_id" />
+                                <!-- <field name="state" /> -->
+                                <field name="log_ids">
+                                    <list>
+                                        <field name="date" />
+                                        <field name="created_by" widget="many2one" />
+                                        <field name="description" />
+                                    </list>
+                                </field>
+                                <field name="history" invisible="age &lt; 50" />
+                                <field name="age" />
+                            </group>
+                        </page>
+                        <page string="Health Details">
+                            <group>
+                                <field name="cr_ratio" />
+                                <field name="blood_type" />
+                                <field name="pcr" />
+                                <field name="image" widget="image" class="oe_avatar" />
+
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="hms_patient_action" model="ir.actions.act_window">
+        <field name="name">Patients</field>
+        <field name="res_model">hms.patient</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
